@@ -43,13 +43,7 @@ var myminute = mydate.getMinutes();
 document.write(myyear+"年"+mymonth+"月"+myday+"日"+"00:00:00");
 </script> 
 </h2>
-<!--web段当前位置-->
-<h2 style="color: #F71013; font-size: 20px;">
-<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>  
-<script type="text/javascript">  
-document.write( "您当前所在城市:"+returnCitySN["cname"]) 
-</script> 
-</h2>
+
 
 <br>
 <!--城市查询-->
@@ -77,95 +71,22 @@ document.write( "您当前所在城市:"+returnCitySN["cname"])
 
 	<!-- 腾讯地图定位-->
 	
-<table width="700" height="600" border="2" align="center">
+<table width="700" height="200" border="2" align="center">
   <tbody>
     <tr>
       <td>
       	
- 
-   <h3 style="color: #F3F0E8">
-   
-   您的纬度：<span id="latitude"></span>  
-      <br>
-   您的经度：<span id="longitude"></span> 
-   <br>
-        <br>
 
-   <button  style="width:300px; height:40px; font-size:18px"   id="openTXMap">点击加载腾讯地图</button>
-
-   </h3>
-   
+<!--web段当前位置-->
+<h2 style="color: #F71013; font-size: 20px;">
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>  
+<script type="text/javascript">  
+document.write( "您当前所在城市:"+returnCitySN["cname"]) 
+</script> 
+</h2>   
    <br>
    <input  type="button" style="width:300px; height:40px; font-size:18px"   value="点击此处预览您附近的小姐信息" onclick="window.open('xjdata.xls')">
-	<p id="errMsg"></p>	
-	<div id="mapWrap" ></div>
 
-
-<script>
-		var latitude, longitude
- 
-		if (navigator.geolocation) {
-			console.log("支持")
-			navigator.geolocation.getCurrentPosition(showPosition, showError)	
-			// navigator.geolocation.watchPosition(showPosition, showError)	
-		} 
-		else {
-			console.log("不支持")
-		}
- 
-		function showPosition (position) {
-			document.querySelector('#latitude').innerText  = position.coords.latitude
-			document.querySelector('#longitude').innerText = position.coords.longitude
-			// 这里做了经纬度偏差的修正
-			latitude  = position.coords.latitude  - 0.002463
-			longitude = position.coords.longitude + 0.005591
-		}
- 
-		function showError (error) {
-			errMsg = document.querySelector('#errMsg')
- 
-			switch(error.code) {
-				case error.PERMISSION_DENIED:
-					// User denied the request for Geolocation.
-					errMsg.innerText = "定位失败,用户拒绝请求地理定位"
-					break;
-				case error.POSITION_UNAVAILABLE:
-					// Location information is unavailable.
-					errMsg.innerText = "定位失败,位置信息是不可用"
-					break;
-				case error.TIMEOUT:
-					// The request to get user location timed out.
-					errMsg.innerText = "定位失败,请求获取用户位置超时"
-					break;
-				case error.UNKNOWN_ERROR:
-					// An unknown error occurred.
-					errMsg.innerText = "定位失败,定位系统失效"
-					break;
-		        }
-		}
- 
-	function init() {
-            var myLatlng = new qq.maps.LatLng(latitude, longitude);
-            var myOptions = {
-                zoom: 16,
-                center: myLatlng
-            };
-            var map = new qq.maps.Map(document.getElementById("mapWrap"), myOptions);
-        }
- 
-        function loadScript() {
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = "https://map.qq.com/api/js?v=2.exp&key=HESBZ-EUHCP-UFQDX-LWEAB-ZBAXT-NEFFS&callback=init";
-            document.body.appendChild(script);
-        }
- 
-        document.getElementById("openTXMap").onclick = function () {
-        	loadScript()
-		init()
-        }
- 
-	</script>	
 	
      	
       	
